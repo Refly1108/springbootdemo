@@ -17,9 +17,7 @@ pipelineJob('DSL SEND TEST') {
         cpsScm {
             scm {
                 git{
-                    remote{
-                        url(remoteURL)
-                    }
+                    url(remoteURL)
                     branches(remoteBranch)
                     scriptPath("testDLS.groovy")
                     extensions{}
