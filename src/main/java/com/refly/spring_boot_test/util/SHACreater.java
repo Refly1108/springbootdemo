@@ -45,7 +45,7 @@ public class SHACreater {
     public static String generateSignatureSHA1(String signature,String timestamp) {
 
         System.out.println(signature);
-        String str = "jsapi_ticket=" + signature + "&noncestr=const&timestamp=" + timestamp + "&url=http://localhost:3000/";
+        String str = "jsapi_ticket=" + signature + "&noncestr=const&timestamp=" + timestamp + "&url=http://175.178.13.221/client/";
         return getSha1(str);
 
     }
