@@ -31,4 +31,14 @@ public class WeiXinConfig {
     public static void setToken(String token) {
         WeiXinConfig.token = token;
     }
+    public static boolean signatureChecking() {
+
+       // System.out.println(day2.getTime() / 1000-1679760380);
+        if(tokenCreateTime!=null&&((new Date().getTime()-tokenCreateTime.getTime())/1000)<7200){
+
+            return true;
+        }
+        return false;
+
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -29,6 +30,12 @@ public class WeixinServiceImpl implements WeixinService {
         Map<String, Object> tokenBody,signatureBody;
         ObjectMapper mapper = new ObjectMapper();
         SignatureResponse signatureResponse = new SignatureResponse();
+
+        if(WeiXinConfig.signatureChecking()){
+            signatureResponse.setSignature(SHACreater.generateSignatureSHA1(WeiXinConfig.getToken(),timeStap));
+            signatureResponse.setStatus(Integer.valueOf(200));
+
+        }else{
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type", "text/plain");
         String tokenUrl = WeiXinConfig.Token_URL+WeiXinConfig.grant_type+"&appid="+WeiXinConfig.appid+"&secret="+WeiXinConfig.secret;
@@ -54,11 +61,15 @@ public class WeixinServiceImpl implements WeixinService {
                 signatureResponse.setStatus((Integer.valueOf(500)));
                 return signatureResponse;
             }
+            WeiXinConfig.setToken((String)signatureBody.get("ticket"));
+            WeiXinConfig.setTokenCreateTime(new Date());
             signatureResponse.setSignature(SHACreater.generateSignatureSHA1((String)signatureBody.get("ticket"),timeStap));
+
+            signatureResponse.setStatus((Integer.valueOf(200)));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
+        }
 
         return signatureResponse;
     }

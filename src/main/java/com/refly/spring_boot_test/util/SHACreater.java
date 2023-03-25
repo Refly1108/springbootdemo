@@ -3,6 +3,7 @@ package com.refly.spring_boot_test.util;
 import com.refly.spring_boot_test.service.impl.WeixinServiceImpl;
 
 import java.security.MessageDigest;
+import java.util.Date;
 
 public class SHACreater {
 
@@ -29,10 +30,16 @@ public class SHACreater {
     }
     public static void main(String[] args) {
 
-        WeixinServiceImpl weixinService = new WeixinServiceImpl();
-        weixinService.getSignature("1679751805");
+      //  WeixinServiceImpl weixinService = new WeixinServiceImpl();
+       // weixinService.getSignature("1679751805");
 //        System.out.println(generateSignatureSHA1("67_kkg-p04-OTSYQyDM2Eu-9AlCsoJi51TnbhVobztt7Nd4KefKBLM5jIvgYj5Lqskfl6akGGqNi7km72wygAr3yE91ikC7nVqaaLzoTPXKn1j3RhQ6xVGjJPZEdKgEHOjAIALOV",
 //                "1679751805"));
+      Date day1 = new Date();
+        System.out.println(day1.getTime());
+        Date day2 = new Date();
+        System.out.println(day2.getTime());
+
+        System.out.println(day2.getTime() / 1000-1679760380);
     }
 
     public static String generateSignatureSHA1(String signature,String timestamp) {
