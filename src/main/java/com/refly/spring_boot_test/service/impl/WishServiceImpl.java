@@ -24,7 +24,7 @@ public class WishServiceImpl implements WishService {
         HttpEntity<String> httpEntity = new HttpEntity((MultiValueMap)httpHeaders);
         ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,httpEntity,String.class);
 
-
+        System.out.println(responseEntity.toString());
         return responseEntity;
     }
 }
